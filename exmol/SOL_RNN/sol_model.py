@@ -144,5 +144,8 @@ def compile_model():
     return compile_model
 
 
+def train_model():
 
-#result = compile_model().fit(train_data, validation_data=val_data, epochs=100, verbose=2)
+    result = compile_model().fit(train_data, validation_data=val_data, epochs=100, verbose=2)
+
+    return result
