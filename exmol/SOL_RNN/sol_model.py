@@ -138,6 +138,7 @@ def uncompiled_model():
 
 
 def compile_model():
+    "function for compileing solubility RNN"
     compile_model = uncompiled_model()
   
     compile_model.compile(tf.optimizers.Adam(1e-4), loss="mean_squared_error")
@@ -145,7 +146,20 @@ def compile_model():
 
 
 def train_model():
-
+    "function thet trains solubility RNN model"
     result = compile_model().fit(train_data, validation_data=val_data, epochs=100, verbose=2)
 
     return result
+
+
+# def save_untrained_model():
+#     "funtion to save untrained solubility RNN model"
+#     model = compile_model()
+
+#     return model.save()
+
+# def save_trained_model():
+#     "funtion to train and save solubility RNN model"
+#     model = train_model()
+
+#     return model.save()
