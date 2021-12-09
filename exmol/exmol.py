@@ -475,6 +475,37 @@ def highcf_explain(
     
     return examples[:1]  + hresult
 
+
+def lowcf_explain(
+    examples: List[Example],
+    delta: Union[float, Tuple[float, float]] = (1, 1),
+    nmols: int = 4,
+) -> List[Example]:
+    """From given :obj:`Examples`, find best counterfactuals using :ref:`readme_link:counterfactual generation`
+
+    This version works with regression, so that a counterfactual is if the given example is higher or
+    lower than base.
+
+    :param examples: Output from :func:`sample_space`
+    :param delta: float or tuple of hi/lo indicating margin for what is counterfactual
+    :param nmols: Desired number of molecules
+    """
+    if type(delta) is float:
+        delta = (delta, delta)
+
+
+
+    def is_low(e):
+        return e.yhat + delta[1] <= examples[0].yhat
+
+
+    lresult = (
+        [] if delta[1] is None else _select_examples(is_low, examples[1:], nmols )
+    )
+    for i, l in enumerate(lresult):
+        l.label = f"Decrease ({i+1})"
+    return examples[:1] + lresult 
+
 def plot_space(
     examples: List[Example],
     exps: List[Example],
