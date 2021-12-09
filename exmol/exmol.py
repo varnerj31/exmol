@@ -448,7 +448,7 @@ def rcf_explain(
 
 def highcf_explain(
     examples: List[Example],
-    delta: Union[float, Tuple[float, float]] = (-1, 1),
+    delta: 1,
     nmols: int = 4,
 ) -> List[Example]:
     """From given :obj:`Examples`, find best counterfactuals using :ref:`readme_link:counterfactual generation`
